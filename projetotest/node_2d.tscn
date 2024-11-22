@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://b2txrrmmoscnc"]
+[gd_scene load_steps=2 format=3 uid="uid://b2txrrmmoscnc"]
+
+[ext_resource type="Texture2D" uid="uid://cj0ic80tbviyp" path="res://icon.svg" id="1_2dcsv"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(269, 163)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2dcsv")
