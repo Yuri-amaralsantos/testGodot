@@ -1,11 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2txrrmmoscnc"]
+[gd_scene load_steps=8 format=3 uid="uid://b2txrrmmoscnc"]
 
-[ext_resource type="Texture2D" uid="uid://cj0ic80tbviyp" path="res://icon.svg" id="1_2dcsv"]
 [ext_resource type="Script" path="res://movimento.gd" id="1_6d37p"]
+[ext_resource type="Texture2D" uid="uid://bt21obblum11t" path="res://Sprite-0001-Sheet.png" id="2_834a1"]
 [ext_resource type="Texture2D" uid="uid://dlh8e7ojcbm1m" path="res://sprite.jpg" id="2_gmp2a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4a8jt"]
 radius = 65.9242
+
+[sub_resource type="Animation" id="Animation_1dp8l"]
+resource_name = "walk"
+length = 0.3
+loop_mode = 1
+step = 0.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(0, 0), Vector2i(3, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cwvuu"]
+_data = {
+"walk": SubResource("Animation_1dp8l")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3tsd"]
 size = Vector2(32, 32)
@@ -16,14 +39,22 @@ size = Vector2(32, 32)
 position = Vector2(575, 328)
 script = ExtResource("1_6d37p")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("1_2dcsv")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_4a8jt")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(-2, -2)
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(4, 4)
+texture = ExtResource("2_834a1")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+libraries = {
+"": SubResource("AnimationLibrary_cwvuu")
+}
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(933, 583)
