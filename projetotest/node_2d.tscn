@@ -56,18 +56,19 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_dy8fl"]
 resource_name = "idle"
-step = 1.0
+length = 1.00005
+step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Marker2D/Sprite2D:frame_coords")
+tracks/0/path = NodePath("Marker2D/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2i(0, 1)]
+"values": [12, 13]
 }
 
 [sub_resource type="Animation" id="Animation_uw24x"]
@@ -88,20 +89,20 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_1dp8l"]
 resource_name = "walk"
-length = 0.902
+length = 0.666683
 loop_mode = 1
-step = 1.0
+step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Marker2D/Sprite2D:frame_coords")
+tracks/0/path = NodePath("Marker2D/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.46),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(0, 2), Vector2i(0, 1)]
+"values": [24, 25, 26, 25]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cwvuu"]
@@ -145,7 +146,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("2_g3tom")
 centered = false
 offset = Vector2(-52, -27.3333)
-hframes = 3
+hframes = 12
 vframes = 4
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -171,7 +172,6 @@ texture = ExtResource("2_gmp2a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-0.442339, 15.1661)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_j3tsd")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]

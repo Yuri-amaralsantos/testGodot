@@ -1,9 +1,9 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1732579399
-Free-City-Backgrounds-Pixel-Art3.png::CompressedTexture2D::3989010447581971143::1732578166::1732578166::1::::<><>::
-icon.svg::CompressedTexture2D::5456641484266039479::1732234914::1732572038::1::::<><>::
-movimento.gd::GDScript::-1::1732579032::0::1::::<>CharacterBody2D<>::
-Ninja.png::CompressedTexture2D::2396178285571671259::1732572028::1732572038::1::::<><>::
-node_2d.tscn::PackedScene::4322170400576372532::1732579278::0::1::::<><>::res://movimento.gd<>uid://bw3koiw8sf3ot::::res://Free-City-Backgrounds-Pixel-Art3.png<>uid://baeyyapr3ipyp::::res://Ninja.png<>uid://dlh8e7ojcbm1m::::res://sprite.jpg
-Sprite-0001-Sheet.png::CompressedTexture2D::3777350609697100463::1732326128::1732572038::1::::<><>::
-sprite.jpg::CompressedTexture2D::7947802482099102712::1732578353::1732578353::1::::<><>::
+::res://::1732583836
+Free-City-Backgrounds-Pixel-Art3.png::CompressedTexture2D::3989010447581971143::1732581895::1732582216::1::::<><>::
+icon.svg::CompressedTexture2D::5456641484266039479::1732232032::1732582215::1::::<><>::
+inimigo.tscn::PackedScene::4761877515015940808::1732581895::0::1::::<><>::uid://baeyyapr3ipyp::::res://Ninja.png
+movimento.gd::GDScript::-1::1732581895::0::1::::<>CharacterBody2D<>::
+Ninja.png::CompressedTexture2D::2396178285571671259::1732583836::1732583836::1::::<><>::
+node_2d.tscn::PackedScene::4322170400576372532::1732583727::0::1::::<><>::res://movimento.gd<>uid://bw3koiw8sf3ot::::res://Free-City-Backgrounds-Pixel-Art3.png<>uid://baeyyapr3ipyp::::res://Ninja.png<>uid://dlh8e7ojcbm1m::::res://sprite.jpg<>uid://b83xors8cikqa::::res://inimigo.tscn
+sprite.jpg::CompressedTexture2D::7947802482099102712::1732581895::1732582216::1::::<><>::
