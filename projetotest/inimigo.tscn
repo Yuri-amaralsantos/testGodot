@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://b83xors8cikqa"]
 
-[ext_resource type="Texture2D" uid="uid://baeyyapr3ipyp" path="res://Ninja.png" id="1_vdr03"]
+[ext_resource type="Texture2D" uid="uid://ddhh5dpl2kbtf" path="res://enemies.png" id="1_r3hv0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lt5sn"]
-radius = 8.17584
-height = 68.8997
+radius = 19.2372
+height = 98.2281
 
 [sub_resource type="Animation" id="Animation_vtgpx"]
 length = 0.001
@@ -35,8 +35,9 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_02iwe"]
 resource_name = "attack"
-length = 0.4735
-step = 1.0
+length = 0.83335
+loop_mode = 1
+step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,10 +45,22 @@ tracks/0/path = NodePath("Marker2D/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 1,
-"values": [0]
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Marker2D/Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(0, 1), Vector2i(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_dy8fl"]
@@ -113,7 +126,7 @@ _data = {
 position = Vector2(575, 328)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 19)
+position = Vector2(-1, -17)
 scale = Vector2(4.1586, 2.62654)
 shape = SubResource("CapsuleShape2D_lt5sn")
 
@@ -121,14 +134,13 @@ shape = SubResource("CapsuleShape2D_lt5sn")
 
 [node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
 texture_filter = 1
-position = Vector2(-2, -1)
+position = Vector2(-241, -190)
 scale = Vector2(3, 3)
-texture = ExtResource("1_vdr03")
+texture = ExtResource("1_r3hv0")
 centered = false
 offset = Vector2(-52, -27.3333)
 hframes = 3
-vframes = 4
-frame = 3
+vframes = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-2, -2)
@@ -137,4 +149,4 @@ position = Vector2(-2, -2)
 libraries = {
 "": SubResource("AnimationLibrary_cwvuu")
 }
-autoplay = "idle"
+autoplay = "attack"
