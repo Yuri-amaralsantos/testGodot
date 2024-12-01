@@ -1,2 +1,4 @@
-res://inimigo.tscn
 res://node_2d.tscn
+res://inimigo.gd
+res://inimigo.tscn
+res://movimento.gd
