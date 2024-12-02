@@ -15,85 +15,87 @@ var life = 100  # Player's health
 @onready var life_label = $Camera2D/Label # Reference to the Label node
 
 func _ready():
-	update_life_text()
+    update_life_text()
+    animation_player.animation_finished.connect(_on_animation_finished)
+    
+func _on_animation_finished(anim_name: String) -> void:
+    if anim_name == "attack":  # Verifica se a animação finalizada é a de ataque
+        attack_area.monitoring = false  # Desativa a área de ataque
+        is_attacking = false
 
 func take_damage(amount: int):
-	life -= amount
-	
-		
-	update_life_text()
+    life -= amount
+    
+        
+    update_life_text()
 
 func update_life_text():
-	life_label.text = "Life: %d" % life
+    life_label.text = "Life: %d" % life
 
 
 
 
 
 func _physics_process(delta: float) -> void:
-	
-	# Apply gravity if not on the floor
-	if not is_on_floor():
-		velocity.y += get_gravity().y * delta 
+    # Aplicar gravidade se não estiver no chão
+    if not is_on_floor():
+        velocity.y += get_gravity().y * delta 
 
-	# Handle jumping
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		animation_player.play("jump")
-		return  # Exit to avoid overriding jump animation
+    # Lidar com salto
+    if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+        velocity.y = JUMP_VELOCITY
+        animation_player.play("jump")
+        return  # Sair para evitar sobrepor a animação de salto
 
-	# Handle attack
-	if Input.is_action_just_pressed("fire") and not is_attacking:
-		is_attacking = true
-		animation_player.play("attack")
-		velocity.x = 0
-		attack_area.monitoring = true  # Enable attack area
-		await animation_player.animation_finished
-		attack_area.monitoring = false  # Disable attack area
-		is_attacking = false
-		return
-	
-	
-	
-	# Handle horizontal movement
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if Input.is_action_pressed("ui_left"):
-		velocity.x = direction * SPEED
-		position2d.scale.x=1  # Flip the sprite horizontally
-		
-	elif Input.is_action_pressed("ui_right"):
-		velocity.x = direction * SPEED
-		position2d.scale.x=-1  # Flip the sprite horizontally
-	else:
-		velocity.x = 0
-	
-	if direction != 0:
-		velocity.x = direction * SPEED
-		# Update facing direction
-		if direction < 0 and not facing_left:
-			facing_left = true
-			
-		elif direction > 0 and facing_left:
-			facing_left = false
+    # Lidar com ataque
+    if Input.is_action_just_pressed("fire") and not is_attacking:
+        is_attacking = true
+        velocity.x = 0  # Parar movimento horizontal durante o ataque
+        animation_player.play("attack")
+        attack_area.monitoring = true  # Ativar a área de ataque
+        return
 
-		# Play walking animation
-		if not is_walking and is_on_floor() and not is_attacking:
-			is_walking = true
-			animation_player.play("walk")
-	else: # Smoothly decelerate
-		if is_walking:
-			is_walking = false
-	
-	# Play idle animation if not moving, attacking, or jumping
-	if not is_walking and not is_attacking and is_on_floor() and velocity.y == 0:
-		animation_player.play("idle")
+    # Ignorar movimento se estiver atacando
+    if is_attacking:
+        return  # Cancelar qualquer outra entrada durante o ataque
 
-	# Move the character
-	move_and_slide() 
+    # Lidar com movimento horizontal
+    var direction := Input.get_axis("ui_left", "ui_right")
+    if Input.is_action_pressed("ui_left"):
+        is_walking = true
+        animation_player.play("walk")
+        velocity.x = direction * SPEED
+        position2d.scale.x = 1  # Virar sprite horizontalmente
+    elif Input.is_action_pressed("ui_right"):
+        is_walking = true
+        animation_player.play("walk")
+        velocity.x = direction * SPEED
+        position2d.scale.x = -1  # Virar sprite horizontalmente
+    else:
+        velocity.x = 0
+
+    # Atualizar animações de andar
+    if direction != 0:
+        if direction < 0 and not facing_left:
+            facing_left = true
+        elif direction > 0 and facing_left:
+            facing_left = false
+
+        
+    else:
+        if is_walking:
+            is_walking = false
+
+    # Reproduzir animação de idle se parado e não atacando
+    if not is_walking and not is_attacking and is_on_floor() and velocity.y == 0:
+        animation_player.play("idle")
+
+    # Mover o personagem
+    move_and_slide()
 
 
 
 func _on_attack_area_body_entered(body):
-	
-	if body.name == "inimigo":
-		body.take_damage(10)  # Apply damage to the enemy
+    
+    if body.name == "inimigo":
+        body.take_damage(10)  # Apply damage to the enemy
